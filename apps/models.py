@@ -1,6 +1,6 @@
 from django.db import models
-
 from treenode.models import TreeNodeModel
+
 
 class Root(TreeNodeModel):
     treenode_display_name = "name"

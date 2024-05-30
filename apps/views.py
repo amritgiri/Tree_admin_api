@@ -2,18 +2,21 @@
 from django.http import JsonResponse
 from django.views import View
 from rest_framework import viewsets
-from .serializers import RootSerializers
-from .models import Root
 from rest_framework.response import Response
+
+from .models import Root
+from .serializers import RootSerializers
+
 
 def build_tree(node):
     children = node.get_children()
     tree = {
         "id": node.id,
         "name": node.name,
-        "children": [build_tree(child) for child in children]
+        "children": [build_tree(child) for child in children],
     }
     return tree
+
 
 class RootListCreateAPIView(viewsets.ModelViewSet):
     queryset = Root.objects.all()

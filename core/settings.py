@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
 
-env_path = load_dotenv(os.path.join(BASE_DIR,".env"))
+env_path = load_dotenv(os.path.join(BASE_DIR, ".env"))
 load_dotenv(env_path)
 
 # Quick-start development settings - unsuitable for production
@@ -76,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
-
 
 
 # Database
