@@ -1,10 +1,25 @@
-from django.shortcuts import render
-
+# from django.shortcuts import render
+from django.http import JsonResponse
+from django.views import View
 from rest_framework import viewsets
-from rest_framework.parsers import FormParser, MultiPartParser
 from .serializers import RootSerializers
 from .models import Root
+from rest_framework.response import Response
+
+def build_tree(node):
+    children = node.get_children()
+    tree = {
+        "id": node.id,
+        "name": node.name,
+        "children": [build_tree(child) for child in children]
+    }
+    return tree
 
 class RootListCreateAPIView(viewsets.ModelViewSet):
-    queryset = Root.objects.all()
+    queryset = Root.objects.filter()
     serializer_class = RootSerializers
+
+    def list(self, request, *args, **kwargs):
+        root_nodes = Root.objects.filter(tn_parent=None)
+        tree = [build_tree(node) for node in root_nodes]
+        return Response(tree)
