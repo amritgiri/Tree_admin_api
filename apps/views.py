@@ -16,10 +16,11 @@ def build_tree(node):
     return tree
 
 class RootListCreateAPIView(viewsets.ModelViewSet):
-    queryset = Root.objects.filter()
+    queryset = Root.objects.all()
     serializer_class = RootSerializers
 
     def list(self, request, *args, **kwargs):
         root_nodes = Root.objects.filter(tn_parent=None)
         tree = [build_tree(node) for node in root_nodes]
+
         return Response(tree)
