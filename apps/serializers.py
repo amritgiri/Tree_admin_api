@@ -5,4 +5,4 @@ from .models import Root
 class RootSerializers(serializers.ModelSerializer):
     class Meta:
         model = Root
-        field = '__all__'
+        fields = '__all__'
